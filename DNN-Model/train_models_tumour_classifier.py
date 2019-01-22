@@ -140,16 +140,7 @@ if __name__ == '__main__':
 
 	path_best_model = './crossvalidation%s_best_model.keras'%fold
 	best_accuracy = 0.0 
-	if feature_type == '1':
-		data = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/pcawg_mutations_complete.csv', index_col = [0])
-	elif feature_type == '2': 
-		data = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/pcawg_data_genes_complete.csv', index_col = [0])
-	elif feature_type == '3': 
-		data = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/pcawg_genes_only.csv', index_col = [0])
-	elif feature_type == '4': 
-		data = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/pcawg_mutation_distribution.csv', index_col = [0])
-	elif feature_type == '5': 
-		data = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/pcawg_mutations_types.csv', index_col = [0])
+	data = pd.read_csv(feature_type, index_col = [0])
 
 	### Making training, test, validation data 
 	training_samples = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/training_idx_pcawg.csv', index_col=[0])
@@ -225,7 +216,7 @@ if __name__ == '__main__':
 	## Generate Class Report
 
 	c_report = classification_report(test_labels, y_pred, digits=3)
-		r = to_table(c_report)
+	r = to_table(c_report)
 	cols = r[0]
 	r = pd.DataFrame(data=r[1:-1], columns = cols, index = d.Cancer)
 
@@ -237,9 +228,9 @@ if __name__ == '__main__':
 	r['sample_size'] = samples
 	r.columns = [x.replace('-', '_') for x in r.columns]
 	r['f1_score'] = [float(x) for x in r.f1_score]
-	#r.to_csv('./class_report_fold%s.csv'%fold)
-	#c_df.to_csv('./confusion_matrix_fold_%s.csv'%fold)
-	#p_df.to_csv('./probability_classification_%s.csv'%fold)
+	r.to_csv('./class_report_fold%s.csv'%fold)
+	c_df.to_csv('./confusion_matrix_fold_%s.csv'%fold)
+	p_df.to_csv('./probability_classification_%s.csv'%fold)
 
 
 
