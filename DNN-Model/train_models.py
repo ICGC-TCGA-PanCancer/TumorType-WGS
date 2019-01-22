@@ -123,7 +123,16 @@ def fitness(learning_rate, weight_decay, dropout, num_dense_layers, num_dense_no
 	del model 
 	K.clear_session() 
 	return -accuracy 
-
+	
+def to_table(report):
+    report = report.splitlines()
+    res = []
+    res.append(['']+report[0].split())
+    for row in report[2:-2]:
+       res.append(row.split())
+    lr = report[-1].split()
+    res.append([' '.join(lr[:3])]+lr[3:])
+    return np.array(res)
 
 if __name__ == '__main__': 
 	fold = int(sys.argv[1])
