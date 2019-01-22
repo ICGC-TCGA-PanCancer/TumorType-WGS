@@ -203,20 +203,34 @@ if __name__ == '__main__':
 	b = pd.Series(test_labels)
 	d = pd.DataFrame({'Factor':b, 'Cancer':a})
 	d = d.drop_duplicates()
-	d = d.sort_values('Factor')
-	target_names = list(d.Cancer) 
+	d = d.sort_values('Factor') 
 
 	## Create array of prediction probabilities 
 	p = model.predict_proba(x_test)
+	p_df = pd.DataFrame(data = p, columns = d.Cancer, index = test_labels_names)
 
 	## Generate Confusion Matrix
-	c_matrix = confusion_matrix(test_label_names, y_pred)
+	c_matrix = confusion_matrix(test_labels, y_pred)
 	c_df = pd.DataFrame(data=c_matrix, index=d.Cancer, columns = d.Cancer)
 
 	## Generate Class Report
 
-	c_report = classification_report(test_label_names, y_pred, digits=3)
+	c_report = classification_report(test_labels, y_pred, digits=3)
+		r = to_table(c_report)
+	cols = r[0]
+	r = pd.DataFrame(data=r[1:-1], columns = cols, index = d.Cancer)
 
+	samples = []
+	for i in r.index: 
+		l = len(data[data.index == i])
+		samples.append(l)
+
+	r['sample_size'] = samples
+	r.columns = [x.replace('-', '_') for x in r.columns]
+	r['f1_score'] = [float(x) for x in r.f1_score]
+	#r.to_csv('./class_report_fold%s.csv'%fold)
+	#c_df.to_csv('./confusion_matrix_fold_%s.csv'%fold)
+	#p_df.to_csv('./probability_classification_%s.csv'%fold)
 
 
 
