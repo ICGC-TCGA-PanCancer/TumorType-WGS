@@ -143,15 +143,15 @@ if __name__ == '__main__':
 	data = pd.read_csv(feature_type, index_col = [0])
 
 	### Making training, test, validation data 
-	training_samples = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/training_idx_pcawg.csv', index_col=[0])
+	training_samples = pd.read_csv('./training_idx_pcawg.csv', index_col=[0])
 	training_samples.columns = ['guid', 'split']
 	training_samples = training_samples[training_samples.split == fold]
 	training_data = data[data['guid'].isin(training_samples.guid)]
-	validation_samples = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/validation_idx_pcawg.csv', index_col=[0])
+	validation_samples = pd.read_csv('./validation_idx_pcawg.csv', index_col=[0])
 	validation_samples.columns = ['guid', 'split']
 	validation_samples = validation_samples[validation_samples.split == fold]
 	validation_data = data[data['guid'].isin(validation_samples.guid)]
-	test_samples = pd.read_csv('/Users/gatwal/Desktop/SpatialSigs/test_idx_pcawg.csv', index_col=[0])
+	test_samples = pd.read_csv('./test_idx_pcawg.csv', index_col=[0])
 	test_samples.columns = ['guid', 'split']
 	test_samples = test_samples[test_samples.split == fold]
 	test_data = data[data['guid'].isin(test_samples.guid)]
