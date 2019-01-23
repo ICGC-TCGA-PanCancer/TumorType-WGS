@@ -1,4 +1,3 @@
-#import matplotlib.pyplot as plt 
 import tensorflow as tf
 import random as rn
 import numpy as np 
