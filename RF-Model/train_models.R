@@ -1,7 +1,6 @@
-#run LR with SNV
 args <- commandArgs()
 print(args)
-#args <- c("MUT","Breast-AdenoCA","chi.squared")
+
 dataType <- args[0]
 cancerType <- args[1]
 fwMethod <- args[2]
