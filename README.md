@@ -1,5 +1,5 @@
 # TumorType-WGS
-Classifying tumor types based on Whole Genome Sequencing (WGS) data. A web version of the model where vcf files can be uploaded and predict cancer types can be found at: [DeepTumour](deeptumour.oicr.on.ca)
+Classifying tumor types based on Whole Genome Sequencing (WGS) data. A web version of the model where vcf files can be uploaded and predict cancer types can be found at: [DeepTumour](https://deeptumour.oicr.on.ca)
 
 #### Training RF Models
 ```bash
